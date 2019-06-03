@@ -13,7 +13,7 @@ namespace Belatrix.WebApi.Repository.Postgresql
         }
         public  async Task<int> Create(T entity)
         {
-            _context.Add(entity);
+            await _context.AddAsync(entity);
             return await _context.SaveChangesAsync();
         }
 
