@@ -11,10 +11,10 @@ namespace Belatrix.WebApi.Repository.Postgresql
         {
             _context = context;
         }
-        public Task<int> Create(T entity)
+        public  async Task<int> Create(T entity)
         {
             _context.Add(entity);
-            return _context.SaveChangesAsync();
+            return await _context.SaveChangesAsync();
         }
 
         public async Task<bool> Delete(T entity)
