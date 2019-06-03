@@ -24,11 +24,11 @@ namespace Belatrix.WebApi.Repository.Postgresql.Configurations
             builder.Property(e => e.SupplierId)
                 .HasColumnName("supplier_id");
 
-            builder.Property(e => e.UnitPrice)
+            builder.Property(e => e.UnitPrice).IsRequired(false)
                 .HasColumnName("unit_price");
 
             builder.Property(e => e.Package)
-                .IsRequired()
+                .IsRequired(false)
                 .HasMaxLength(30)
                 .HasColumnName("package");
 

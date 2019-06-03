@@ -22,32 +22,32 @@ namespace Belatrix.WebApi.Repository.Postgresql.Configurations
                 .HasColumnName("company_name");
 
             builder.Property(e => e.ContactName)
-                .IsRequired()
+                .IsRequired(false)
                 .HasMaxLength(50)
                 .HasColumnName("contact_name");
 
             builder.Property(e => e.ContactTitle)
-                .IsRequired()
+                .IsRequired(false)
                 .HasMaxLength(40)
                 .HasColumnName("contact_title");
 
             builder.Property(e => e.City)
-                .IsRequired()
+                .IsRequired(false)
                 .HasMaxLength(40)
                 .HasColumnName("city");
 
             builder.Property(e => e.Country)
-                .IsRequired()
+                .IsRequired(false)
                 .HasMaxLength(40)
                 .HasColumnName("country");
 
             builder.Property(e => e.Phone)
-                .IsRequired()
+                .IsRequired(false)
                 .HasMaxLength(40)
                 .HasColumnName("phone");
 
             builder.Property(e => e.Fax)
-                .IsRequired()
+                .IsRequired(false)
                 .HasMaxLength(30)
                 .HasColumnName("fax");
 

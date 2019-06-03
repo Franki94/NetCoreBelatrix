@@ -18,7 +18,7 @@ namespace Belatrix.WebApi.Repository.Postgresql.Configurations
 
             builder.Property(x => x.FirstName)
                 .IsRequired()
-                .HasColumnName("last_name")
+                .HasColumnName("first_name")
                 .HasMaxLength(40);
 
             builder.Property(x => x.LastName)
@@ -26,16 +26,13 @@ namespace Belatrix.WebApi.Repository.Postgresql.Configurations
                 .HasColumnName("last_name")
                 .HasMaxLength(40);
 
-            builder.Property(x => x.City)
-                .IsRequired()
+            builder.Property(x => x.City).IsRequired(false)
                 .HasColumnName("city").HasMaxLength(40);
 
-            builder.Property(x => x.Country)
-               .IsRequired()
+            builder.Property(x => x.Country).IsRequired(false)
                .HasColumnName("country").HasMaxLength(40);
 
-            builder.Property(x => x.Phone)
-               .IsRequired()
+            builder.Property(x => x.Phone).IsRequired(false)
                .HasColumnName("phone").HasMaxLength(20);
 
             builder.HasIndex(x => new { x.LastName, x.FirstName }).HasName("customer_name_idx");

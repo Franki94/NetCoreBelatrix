@@ -24,7 +24,7 @@ namespace Belatrix.WebApi.Repository.Postgresql.Configurations
                 .HasColumnType("decimal(12,2)")
                 .HasColumnName("unit_price");
 
-            builder.Property(e => e.Quantity)
+            builder.Property(e => e.Quantity).IsRequired()
                 .HasColumnName("queantity");
 
             builder.HasOne(e => e.OrderNavigation)
