@@ -8,6 +8,8 @@ namespace Belatrix.WebApi.Repository.Postgresql.Configurations
     {
         public void Configure(EntityTypeBuilder<Product> builder)
         {
+            builder.ToTable("product");
+
             builder.HasKey(e => e.Id).HasName("PK_products");
 
             builder.Property(e => e.Id)

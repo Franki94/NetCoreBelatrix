@@ -1,9 +1,6 @@
 ﻿using Belatrix.WebApi.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Belatrix.WebApi.Repository.Postgresql.Configurations
 {
@@ -11,6 +8,8 @@ namespace Belatrix.WebApi.Repository.Postgresql.Configurations
     {
         public void Configure(EntityTypeBuilder<Supplier> builder)
         {
+            builder.ToTable("supplier");
+
             builder.HasKey(e => e.Id).HasName("PK_suppliers");
 
             builder.Property(e => e.Id)
