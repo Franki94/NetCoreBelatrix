@@ -12,7 +12,9 @@ namespace Belatrix.WebApi.Repository.Postgresql.Configurations
 
             builder.HasKey(x => x.Id).HasName("PK_customer");
 
-            builder.Property(x => x.Id).HasColumnName("id").UseNpgsqlIdentityColumn();
+            builder.Property(x => x.Id)
+                .HasColumnName("id")
+                .UseNpgsqlIdentityColumn();
 
             builder.Property(x => x.FirstName)
                 .IsRequired()
