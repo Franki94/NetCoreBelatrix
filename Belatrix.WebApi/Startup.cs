@@ -1,3 +1,5 @@
+using Belatrix.WebApi.Models;
+using Belatrix.WebApi.Repository;
 using Belatrix.WebApi.Repository.Postgresql;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -23,7 +25,7 @@ namespace Belatrix.WebApi
             services.AddEntityFrameworkNpgsql()
                         .AddDbContext<BelatrixDbContext>(opt => opt.UseNpgsql(Configuration.GetConnectionString("postgresql"), b => b.MigrationsAssembly("Belatrix.WebApi")))
                                 .BuildServiceProvider();
-
+            services.AddTransient<IRepository<Customer>, Repository<Customer>>();
             services.AddControllers()
                 .AddNewtonsoftJson();
         }
