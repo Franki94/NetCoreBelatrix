@@ -14,10 +14,18 @@ namespace Belatrix.WebApi.Controllers
         {
             _customerRepository = customerRepository;
         }
+        [HttpGet]
         public async Task<IActionResult> GetCustomer()
         {
             var customers = await _customerRepository.Read();
             return Ok(customers);
+        }
+
+        [HttpPut]
+        public async Task<bool> UpdateCustomer(Customer customer)
+        {
+            var customersResult = await _customerRepository.Update(customer);
+            return customersResult;
         }
     }
 }
