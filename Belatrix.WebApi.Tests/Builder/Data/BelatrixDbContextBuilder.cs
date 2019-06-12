@@ -1,15 +1,16 @@
 ﻿using Belatrix.WebApi.Repository.Postgresql;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace Belatrix.WebApi.Tests.Builder.Data
 {
-    public partial class BelatrixDbContextBuilder
+    public partial class BelatrixDbContextBuilder : IDisposable
     {
-        private BelatrixDbContext _context { get; set; }      
+        private BelatrixDbContext _context { get; set; }
 
         public BelatrixDbContextBuilder ConfigureInMemory()
         {
-            var options = new DbContextOptionsBuilder<BelatrixDbContext>().UseInMemoryDatabase("test_base").Options;
+            var options = new DbContextOptionsBuilder<BelatrixDbContext>().UseInMemoryDatabase(Guid.NewGuid().ToString()).Options;
             _context = new BelatrixDbContext(options);
             return this;
         }
@@ -18,5 +19,11 @@ namespace Belatrix.WebApi.Tests.Builder.Data
         {
             return _context;
         }
+
+        public void Dispose()
+        {
+            this.Dispose();
+        }
+
     }
 }

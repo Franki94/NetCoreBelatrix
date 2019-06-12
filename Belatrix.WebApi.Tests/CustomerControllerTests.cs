@@ -1,8 +1,11 @@
 using Belatrix.WebApi.Controllers;
+using Belatrix.WebApi.Models;
 using Belatrix.WebApi.Repository.Postgresql;
 using Belatrix.WebApi.Tests.Builder.Data;
 using FluentAssertions;
+using GenFu;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
@@ -13,7 +16,7 @@ namespace Belatrix.WebApi.Tests
     {
         private readonly BelatrixDbContextBuilder _contextBuilder;
 
-        public CustomerControllerTests(/*BelatrixDbContextBuilder contextBuilder*/)
+        public CustomerControllerTests()
         {
             _contextBuilder = new BelatrixDbContextBuilder();
         }
@@ -31,5 +34,46 @@ namespace Belatrix.WebApi.Tests
             values.Count.Should().Be(10);
         }
 
+        [Fact]
+        public async Task CustomerController_CreateCustomer_Ok()
+        {
+            var db = _contextBuilder.ConfigureInMemory().Build();
+            var repository = new Repository<Models.Customer>(db);
+            var controller = new CustomersController(repository);
+            var request = A.New<Customer>();
+            var response = (await controller.CreateCustomer(request)).Result as OkObjectResult;
+
+            var values = Convert.ToInt32(response.Value);
+            values.Should().Be(request.Id);
+        }
+
+        [Fact]
+        public async Task CustomerController_UpdateCustomer_Ok()
+        {
+            var customer = A.New<Customer>();
+            var db = _contextBuilder.ConfigureInMemory().AddThisCustomer(customer).Build();
+            var repository = new Repository<Models.Customer>(db);
+            var controller = new CustomersController(repository);
+
+            var response = (await controller.UpdateCustomer(customer)).Result as OkObjectResult;
+
+            var values = (bool)response.Value;
+            values.Should().BeTrue();
+        }
+
+        [Fact]
+        public async Task CustomerController_DeleteCustomer_Ok()
+        {
+            var customer = A.New<Customer>();
+            customer.Id = 10;
+            var db = _contextBuilder.ConfigureInMemory().AddThisCustomer(customer).Build();
+            var repository = new Repository<Models.Customer>(db);
+            var controller = new CustomersController(repository);
+            
+            var response = (await controller.DeleteCustomer(10)).Result as OkObjectResult;
+
+            var values = (bool)response.Value;
+            values.Should().BeTrue();
+        }
     }
 }
