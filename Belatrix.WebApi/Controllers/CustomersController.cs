@@ -1,6 +1,7 @@
 ﻿using Belatrix.WebApi.Models;
 using Belatrix.WebApi.Repository;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Belatrix.WebApi.Controllers
@@ -15,12 +16,12 @@ namespace Belatrix.WebApi.Controllers
             _customerRepository = customerRepository;
         }
         [HttpGet]
-        public async Task<IActionResult> GetCustomer()
+        public async Task<ActionResult<IEnumerable<Customer>>> GetCustomers()
         {
             var customers = await _customerRepository.Read();
             return Ok(customers);
         }
-
+    
         [HttpPut]
         public async Task<bool> UpdateCustomer(Customer customer)
         {

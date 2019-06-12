@@ -5,12 +5,7 @@ namespace Belatrix.WebApi.Tests.Builder.Data
 {
     public partial class BelatrixDbContextBuilder
     {
-        private BelatrixDbContext _context { get; set; }
-
-        public BelatrixDbContextBuilder()
-        {
-
-        }
+        private BelatrixDbContext _context { get; set; }      
 
         public BelatrixDbContextBuilder ConfigureInMemory()
         {

@@ -7,7 +7,7 @@ namespace Belatrix.WebApi.Tests.Builder.Data
     public partial class BelatrixDbContextBuilder
     {
 
-        public BelatrixDbContextBuilder AddCustomers()
+        public BelatrixDbContextBuilder Add10Customers()
         {
             AddCustomers(_context);
             return this;
