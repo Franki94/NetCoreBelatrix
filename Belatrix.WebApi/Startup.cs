@@ -1,14 +1,17 @@
+using Belatrix.WebApi;
 using Belatrix.WebApi.Models;
 using Belatrix.WebApi.Repository;
 using Belatrix.WebApi.Repository.Postgresql;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 
+[assembly: ApiConventionType(typeof(BelatrixApiConventions))]
 namespace Belatrix.WebApi
 {
     public class Startup
@@ -32,13 +35,13 @@ namespace Belatrix.WebApi
             services.AddControllers()
                 .AddNewtonsoftJson();
 
-            services.AddSwaggerGen(c => 
+            services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
-                     Title = "Belatrix Api",
-                     Version = "v1"
-                });                
+                    Title = "Belatrix Api",
+                    Version = "v1"
+                });
             });
         }
 
@@ -67,7 +70,7 @@ namespace Belatrix.WebApi
             });
 
             app.UseSwagger();
-            app.UseSwaggerUI(s => 
+            app.UseSwaggerUI(s =>
             {
                 s.SwaggerEndpoint("/swagger/v1/swagger.json", "Belatrix Api v1");
             });
