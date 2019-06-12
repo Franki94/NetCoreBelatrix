@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 
 namespace Belatrix.WebApi
 {
@@ -30,6 +31,15 @@ namespace Belatrix.WebApi
 
             services.AddControllers()
                 .AddNewtonsoftJson();
+
+            services.AddSwaggerGen(c => 
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                     Title = "Belatrix Api",
+                     Version = "v1"
+                });                
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,6 +64,12 @@ namespace Belatrix.WebApi
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+
+            app.UseSwagger();
+            app.UseSwaggerUI(s => 
+            {
+                s.SwaggerEndpoint("/swagger/v1/swagger.json", "Belatrix Api v1");
             });
         }
     }
