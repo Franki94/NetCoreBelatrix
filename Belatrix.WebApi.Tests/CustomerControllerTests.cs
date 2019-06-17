@@ -33,7 +33,18 @@ namespace Belatrix.WebApi.Tests
             var values = response.Value as List<Models.Customer>;
             values.Count.Should().Be(10);
         }
+        [Fact]
+        public async Task CustomerController_GetCustomerById_Ok()
+        {
+            var db = _contextBuilder.ConfigureInMemory().Add1Customer().Build();
+            var repository = new Repository<Models.Customer>(db);
+            var controller = new CustomersController(repository);
 
+            var response = (await controller.GetCustomerById(1)).Result as OkObjectResult;
+
+            var values = response.Value as Models.Customer;
+            values.Id.Should().Be(1);
+        }
         [Fact]
         public async Task CustomerController_CreateCustomer_Ok()
         {

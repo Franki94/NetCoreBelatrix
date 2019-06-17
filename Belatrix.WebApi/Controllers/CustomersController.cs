@@ -20,15 +20,22 @@ namespace Belatrix.WebApi.Controllers
         {
             var customers = await _customerRepository.Read();
             return Ok(customers);
-        }    
+        }
+
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<Customer>> GetCustomerById(int id)
+        {
+            var customers = await _customerRepository.ReadById(id);
+            return Ok(customers);
+        }
         [HttpPut]
-        public async Task<ActionResult<bool>> UpdateCustomer(Customer customer)
+        public async Task<ActionResult<bool>> UpdateCustomer([FromBody] Customer customer)
         {
             var customersResult = await _customerRepository.Update(customer);
             return Ok(customersResult);            
         }
         [HttpPost]
-        public async Task<ActionResult<int>> CreateCustomer(Customer customer)
+        public async Task<ActionResult<int>> CreateCustomer([FromBody] Customer customer)
         {
             var customersResult = await _customerRepository.Create(customer);
             return Ok(customer.Id);
