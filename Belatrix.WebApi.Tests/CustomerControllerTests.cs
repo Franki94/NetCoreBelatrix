@@ -63,14 +63,12 @@ namespace Belatrix.WebApi.Tests
 
         [Fact]
         public async Task CustomerController_DeleteCustomer_Ok()
-        {
-            var customer = A.New<Customer>();
-            customer.Id = 10;
-            var db = _contextBuilder.ConfigureInMemory().AddThisCustomer(customer).Build();
+        {        
+            var db = _contextBuilder.ConfigureInMemory().Add1Customer().Build();
             var repository = new Repository<Models.Customer>(db);
             var controller = new CustomersController(repository);
             
-            var response = (await controller.DeleteCustomer(10)).Result as OkObjectResult;
+            var response = (await controller.DeleteCustomer(1)).Result as OkObjectResult;
 
             var values = (bool)response.Value;
             values.Should().BeTrue();

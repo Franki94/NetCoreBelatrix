@@ -28,6 +28,10 @@ namespace Belatrix.WebApi.Repository.Postgresql
         {
             return await _context.Set<T>().AsNoTracking().ToListAsync();
         }
+        public async Task<T> ReadById(object id)
+        {
+            return await _context.Set<T>().FindAsync(id);
+        }
 
         public async Task<bool> Update(T entity)
         {

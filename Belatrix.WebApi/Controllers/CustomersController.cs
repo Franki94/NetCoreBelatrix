@@ -36,8 +36,8 @@ namespace Belatrix.WebApi.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<bool>> DeleteCustomer(int id)
         {
-
-            var customersResult = await _customerRepository.Delete(new Customer { Id = id});
+            var customer = await _customerRepository.ReadById(id);
+            var customersResult = await _customerRepository.Delete(customer);
             return Ok(customersResult);
         }
     }
