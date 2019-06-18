@@ -17,7 +17,7 @@ namespace Belatrix.WebApi.Repository.Postgresql
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
+        {            
             modelBuilder.ApplyConfiguration(new CustomerConfig());
             modelBuilder.ApplyConfiguration(new OrderConfig());
             modelBuilder.ApplyConfiguration(new OrderItemConfig());

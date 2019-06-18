@@ -13,6 +13,10 @@ namespace Belatrix.WebApi.Repository.Postgresql.Configurations
             builder.HasKey(e => e.Id)
                 .HasName("PK_order_items");
 
+            builder.Property(e => e.Id)
+                .HasColumnName("id")
+                .UseNpgsqlIdentityColumn();
+
             builder.Property(e => e.OrderId)                
                 .HasColumnName("order_id");
 
@@ -25,7 +29,7 @@ namespace Belatrix.WebApi.Repository.Postgresql.Configurations
                 .HasColumnName("unit_price");
 
             builder.Property(e => e.Quantity).IsRequired()
-                .HasColumnName("queantity");
+                .HasColumnName("quantity");
 
             builder.HasOne(e => e.OrderNavigation)
                 .WithMany(e => e.OrderItemsNavigation)
@@ -34,7 +38,7 @@ namespace Belatrix.WebApi.Repository.Postgresql.Configurations
 
             builder.HasOne(e => e.ProductNavigation)
                 .WithMany(e => e.OrderItemsNavigation)
-                .HasForeignKey(e => e.OrderId)
+                .HasForeignKey(e => e.ProductId)
                 .HasConstraintName("FK_order_item__products");
 
             builder.HasIndex(e => e.OrderId)

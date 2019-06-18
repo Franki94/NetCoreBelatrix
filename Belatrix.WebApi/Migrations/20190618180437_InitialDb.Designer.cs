@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Belatrix.WebApi.Migrations
 {
     [DbContext(typeof(BelatrixDbContext))]
-    [Migration("20190603232326_InitialDb")]
+    [Migration("20190618180437_InitialDb")]
     partial class InitialDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -94,7 +94,9 @@ namespace Belatrix.WebApi.Migrations
             modelBuilder.Entity("Belatrix.WebApi.Models.OrderItem", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("id")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<int>("OrderId")
                         .HasColumnName("order_id");
@@ -103,7 +105,7 @@ namespace Belatrix.WebApi.Migrations
                         .HasColumnName("product_id");
 
                     b.Property<int>("Quantity")
-                        .HasColumnName("queantity");
+                        .HasColumnName("quantity");
 
                     b.Property<decimal>("UnitPrice")
                         .HasColumnName("unit_price")
@@ -227,7 +229,7 @@ namespace Belatrix.WebApi.Migrations
 
                     b.HasOne("Belatrix.WebApi.Models.Product", "ProductNavigation")
                         .WithMany("OrderItemsNavigation")
-                        .HasForeignKey("OrderId")
+                        .HasForeignKey("ProductId")
                         .HasConstraintName("FK_order_item__products")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

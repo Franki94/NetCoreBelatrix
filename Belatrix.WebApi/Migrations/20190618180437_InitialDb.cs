@@ -93,16 +93,16 @@ namespace Belatrix.WebApi.Migrations
                 name: "order_item",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     order_id = table.Column<int>(nullable: false),
                     product_id = table.Column<int>(nullable: false),
                     unit_price = table.Column<decimal>(type: "decimal(12,2)", nullable: false),
-                    queantity = table.Column<int>(nullable: false)
+                    quantity = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_order_items", x => x.Id);
+                    table.PrimaryKey("PK_order_items", x => x.id);
                     table.ForeignKey(
                         name: "FK_order_item__orders",
                         column: x => x.order_id,
@@ -111,7 +111,7 @@ namespace Belatrix.WebApi.Migrations
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_order_item__products",
-                        column: x => x.order_id,
+                        column: x => x.product_id,
                         principalTable: "product",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
