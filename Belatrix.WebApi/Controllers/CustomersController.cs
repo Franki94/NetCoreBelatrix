@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Belatrix.WebApi.Controllers
 {
-    [Route("Api/customers")]
+    [Route("api/customers")]
     [ApiController]
     public class CustomersController : Controller
     {
@@ -32,7 +32,7 @@ namespace Belatrix.WebApi.Controllers
         public async Task<ActionResult<bool>> UpdateCustomer([FromBody] Customer customer)
         {
             var customersResult = await _customerRepository.Update(customer);
-            return Ok(customersResult);            
+            return Ok(customersResult);
         }
         [HttpPost]
         public async Task<ActionResult<int>> CreateCustomer([FromBody] Customer customer)
