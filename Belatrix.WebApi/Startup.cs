@@ -40,6 +40,10 @@ namespace Belatrix.WebApi
                                 .BuildServiceProvider();
 
             services.AddTransient<IRepository<Customer>, Repository<Customer>>();
+            services.AddTransient<IRepository<Order>, Repository<Order>>();
+            services.AddTransient<IRepository<OrderItem>, Repository<OrderItem>>();
+            services.AddTransient<IRepository<Product>, Repository<Product>>();
+            services.AddTransient<IRepository<Supplier>, Repository<Supplier>>();
 
             services.AddControllers()
                 .AddNewtonsoftJson();

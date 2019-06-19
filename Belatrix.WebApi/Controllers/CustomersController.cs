@@ -1,4 +1,5 @@
-﻿using Belatrix.WebApi.Models;
+﻿using Belatrix.WebApi.Filters;
+using Belatrix.WebApi.Models;
 using Belatrix.WebApi.Repository;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -15,8 +16,9 @@ namespace Belatrix.WebApi.Controllers
         {
             _customerRepository = customerRepository;
         }
+        [CustomerResultFilter]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Customer>>> GetCustomers()
+        public async Task<ActionResult<IEnumerable<ViewModels.Customer>>> GetCustomers()
         {
             var customers = await _customerRepository.Read();
             return Ok(customers);

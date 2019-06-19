@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Belatrix.WebApi.Controllers
 {
+
+    [Route("api/order-items")]
+    [ApiController]
     public class OrderItemController : Controller
     {
         private readonly IRepository<OrderItem> _repository;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Belatrix.WebApi.Controllers
 {
-    [Route("api/order")]
+    [Route("api/orders")]
     [ApiController]
     public class OrderController : Controller
     {

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Belatrix.WebApi.Controllers
 {
+
+    [Route("api/suppliers")]
+    [ApiController]
     public class SupplierController : Controller
     {
         private readonly IRepository<Supplier> _repository;
